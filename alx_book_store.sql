@@ -1,3 +1,4 @@
+-- Active: 1738428650163@@127.0.0.1@3306@library_db
 -- Create the database
 CREATE DATABASE IF NOT EXISTS alx_book_store;
 USE alx_book_store;
@@ -14,9 +15,9 @@ CREATE TABLE Books (
     title VARCHAR(130) NOT NULL,
     author_id INT,
     price DOUBLE NOT NULL,
-    publication_date DATE,
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+    publication_date DATE
 );
+SELECT * FROM Books;
 
 -- Create Customers table
 CREATE TABLE Customers (
