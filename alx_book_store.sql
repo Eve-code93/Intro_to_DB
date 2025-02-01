@@ -1,5 +1,5 @@
 -- Create the database
-CREATE DATABASE alx_book_store;
+CREATE DATABASE IF NOT EXISTS alx_book_store;
 USE alx_book_store;
 
 -- Create Authors table
@@ -43,3 +43,4 @@ CREATE TABLE Order_Details (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
+
