@@ -12,3 +12,10 @@ VALUES
 
 -- Check for the insertion of the customer with customer_id = 2
 SELECT * FROM customers WHERE customer_id = 2;
+
+-- Check for the insertion of the customer with customer_id = 3
+SELECT * FROM customers WHERE customer_id = 3;
+
+-- Check for the insertion of the customer with customer_id = 4
+SELECT * FROM customers WHERE customer_id = 4;
+
