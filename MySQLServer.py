@@ -1,39 +1,29 @@
 import mysql.connector
-from mysql.connector import errorcode
+from mysql.connector import Error
 
-DB_NAME = 'alx_book_store'
+def create_database():
+    try:
+        # Establish a connection to MySQL server
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='kimjose97!'
+        )
 
-# Database connection configuration
-config = {
-    'user': 'root',  # Replace with your MySQL username
-    'password': 'your_password',  # Replace with your MySQL password
-    'host': '127.0.0.1',
-    'raise_on_warnings': True
-}
+        if connection.is_connected():
+            cursor = connection.cursor()
+            cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+            print("Database 'alx_book_store' created successfully!")
 
-try:
-    # Connect to MySQL server
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
+    except Error as e:
+        print(f"Error: {e}")
 
-    # Create database if it doesn't exist
-    create_db_query = f"CREATE DATABASE IF NOT EXISTS {DB_NAME}"
-    cursor.execute(create_db_query)
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
 
-    print(f"Database '{DB_NAME}' created successfully!")
+if __name__ == "__main__":
+    create_database()
 
-except mysql.connector.Error as err:
-    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Error: Invalid username or password.")
-    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print(f"Error: Database '{DB_NAME}' does not exist and could not be created.")
-    else:
-        print(f"Database error: {err}")
-
-finally:
-    # Close cursor and connection
-    if 'cursor' in locals():
-        cursor.close()
-    if 'connection' in locals() and connection.is_connected():
-        connection.close()
-        print("Database connection closed.")
